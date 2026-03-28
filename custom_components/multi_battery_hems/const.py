@@ -38,13 +38,13 @@ CONF_ZENDURE_DISCHARGE_LIMIT_ENTITY = "zendure_discharge_limit_entity"
 
 # --- Default values ---
 DEFAULT_STRATEGY = STRATEGY_NOM
-DEFAULT_P1_SENSOR = "sensor.p1_meter_vermogen"
-DEFAULT_PRICE_SENSOR = "sensor.enever_stroomprijs_vandebron"
+DEFAULT_P1_SENSOR = ""
+DEFAULT_PRICE_SENSOR = ""
 DEFAULT_PRICE_ATTRIBUTE = "prices_today"
-DEFAULT_MARSTEK_DEVICE_ID = "023d6747ce4a58a95442d0d243dc7667"
-DEFAULT_ZENDURE_NAME = "SolarFlow 800 Plus"
-DEFAULT_ZENDURE_CHARGE_LIMIT = "number.solarflow_800_plus_limiet_opladen"
-DEFAULT_ZENDURE_DISCHARGE_LIMIT = "number.solarflow_800_plus_limiet_ontladen"
+DEFAULT_MARSTEK_DEVICE_ID = ""
+DEFAULT_ZENDURE_NAME = "SolarFlow"
+DEFAULT_ZENDURE_CHARGE_LIMIT = ""
+DEFAULT_ZENDURE_DISCHARGE_LIMIT = ""
 
 # --- Update interval ---
 UPDATE_INTERVAL_SECONDS = 60

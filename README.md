@@ -5,6 +5,7 @@
 [![HACS Custom](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://hacs.xyz)
 [![HA Version](https://img.shields.io/badge/Home%20Assistant-2024.1%2B-blue)](https://www.home-assistant.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-ha--multi--battery--hems-181717?logo=github)](https://github.com/multi-battery-hems/ha-multi-battery-hems)
 
 ---
 
@@ -119,8 +120,8 @@ After installation the following entities are available:
 
 - Home Assistant 2024.1 or newer
 - [HACS](https://hacs.xyz) (for easy installation)
-- A working P1 meter sensor (e.g. `sensor.p1_meter_vermogen`) — positive = consuming, negative = returning
-- A dynamic electricity price sensor with a `prices_today` attribute containing `[{time, price}, ...]` (e.g. [Enever](https://www.enever.nl))
+- A working P1 meter sensor reporting grid power in watts — positive = consuming, negative = returning
+- A dynamic electricity price sensor with a `prices_today` attribute containing `[{time, price}, ...]` (compatible with e.g. Enever, Tibber, ENTSO-E integrations)
 
 ### Per device
 | Device | Prerequisite integration |
@@ -136,7 +137,7 @@ After installation the following entities are available:
 
 1. Open **HACS** in Home Assistant
 2. Click the three dots (top right) → **Custom repositories**
-3. Enter `IgorQuint/ha-multi-battery-hems`, category: **Integration**
+3. Enter `multi-battery-hems/ha-multi-battery-hems`, category: **Integration**
 4. Click **Add**, then find "Multi Battery HEMS" and click **Download**
 5. Restart Home Assistant
 6. Go to **Settings → Integrations → Add Integration** → search for **Multi Battery HEMS**
@@ -158,8 +159,8 @@ After installation the following entities are available:
 The integration is configured entirely through the Home Assistant UI in four steps:
 
 **Step 1 — General**
-- P1 meter sensor entity ID (e.g. `sensor.p1_meter_vermogen`)
-- Electricity price sensor entity ID (e.g. `sensor.enever_stroomprijs_vandebron`)
+- P1 meter sensor entity ID (e.g. `sensor.p1_meter_power`)
+- Electricity price sensor entity ID (e.g. `sensor.electricity_price_today`)
 - Price attribute name (default: `prices_today`)
 - Default strategy
 
@@ -171,8 +172,8 @@ The integration is configured entirely through the Home Assistant UI in four ste
 
 **Step 4 — Zendure** *(if enabled)*
 - Device name
-- Charge limit entity ID (e.g. `number.solarflow_800_plus_limiet_opladen`)
-- Discharge limit entity ID (e.g. `number.solarflow_800_plus_limiet_ontladen`)
+- Charge limit entity ID (e.g. `number.solarflow_charge_limit`)
+- Discharge limit entity ID (e.g. `number.solarflow_discharge_limit`)
 
 ### Changing strategy after setup
 Go to **Settings → Integrations → Multi Battery HEMS → Configure**, or simply use the `select.multi_battery_hems_actieve_strategie` entity on your dashboard.
