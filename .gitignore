@@ -1,0 +1,16 @@
+# Personal deploy configuration — never commit these
+.env.deploy
+deploy.sh
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
