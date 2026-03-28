@@ -2,11 +2,11 @@
   "config": {
     "step": {
       "user": {
-        "title": "Multi Battery HEMS — General settings",
-        "description": "Configure the P1 meter, energy price sensor, and default strategy.",
+        "title": "Multi Battery HEMS — Sensors & strategy",
+        "description": "Select your P1 meter sensor and energy price sensor using the dropdowns, then choose the default strategy.",
         "data": {
-          "p1_sensor": "P1 meter sensor (entity ID)",
-          "price_sensor": "Energy price sensor (entity ID)",
+          "p1_sensor": "P1 meter sensor",
+          "price_sensor": "Energy price sensor",
           "price_attribute": "Price attribute (default: prices_today)",
           "strategy": "Default strategy"
         }
@@ -21,18 +21,50 @@
       },
       "marstek": {
         "title": "Multi Battery HEMS — Marstek Venus E",
-        "description": "Enter the device ID as shown in the marstek_local_api integration.",
+        "description": "Enter the device ID as shown in the marstek_local_api integration (Settings → Devices → Marstek).",
         "data": {
           "marstek_device_id": "Marstek device ID"
         }
       },
       "zendure": {
         "title": "Multi Battery HEMS — Zendure SolarFlow",
-        "description": "Enter the entity IDs for the charge and discharge limit number entities.",
+        "description": "Select the charge and discharge limit entities for your Zendure device from the dropdowns.",
         "data": {
           "zendure_name": "Device name",
-          "zendure_charge_limit_entity": "Charge limit entity ID",
-          "zendure_discharge_limit_entity": "Discharge limit entity ID"
+          "zendure_charge_limit_entity": "Charge limit (number entity)",
+          "zendure_discharge_limit_entity": "Discharge limit (number entity)"
+        }
+      },
+      "reconfigure": {
+        "title": "Multi Battery HEMS — Reconfigure",
+        "description": "Update your settings. All fields are pre-filled with the current configuration.",
+        "data": {
+          "p1_sensor": "P1 meter sensor",
+          "price_sensor": "Energy price sensor",
+          "price_attribute": "Price attribute",
+          "strategy": "Strategy"
+        }
+      },
+      "devices_reconfigure": {
+        "title": "Multi Battery HEMS — Devices",
+        "description": "Which batteries are present?",
+        "data": {
+          "marstek_enabled": "Marstek Venus E present",
+          "zendure_enabled": "Zendure SolarFlow present"
+        }
+      },
+      "marstek_reconfigure": {
+        "title": "Multi Battery HEMS — Marstek Venus E",
+        "data": {
+          "marstek_device_id": "Marstek device ID"
+        }
+      },
+      "zendure_reconfigure": {
+        "title": "Multi Battery HEMS — Zendure SolarFlow",
+        "data": {
+          "zendure_name": "Device name",
+          "zendure_charge_limit_entity": "Charge limit (number entity)",
+          "zendure_discharge_limit_entity": "Discharge limit (number entity)"
         }
       }
     },
@@ -41,16 +73,41 @@
       "unknown": "Unexpected error occurred"
     },
     "abort": {
-      "already_configured": "Multi Battery HEMS is already configured"
+      "already_configured": "Multi Battery HEMS is already configured",
+      "reconfigure_successful": "Reconfiguration successful"
     }
   },
   "options": {
     "step": {
       "init": {
-        "title": "Change HEMS strategy",
-        "description": "Select the desired energy management strategy. The change takes effect immediately.",
+        "title": "Multi Battery HEMS — Change settings",
+        "description": "Update your settings. All fields are pre-filled with the current configuration.",
         "data": {
+          "p1_sensor": "P1 meter sensor",
+          "price_sensor": "Energy price sensor",
+          "price_attribute": "Price attribute",
           "strategy": "Active strategy"
+        }
+      },
+      "devices": {
+        "title": "Multi Battery HEMS — Devices",
+        "data": {
+          "marstek_enabled": "Marstek Venus E present",
+          "zendure_enabled": "Zendure SolarFlow present"
+        }
+      },
+      "marstek": {
+        "title": "Multi Battery HEMS — Marstek Venus E",
+        "data": {
+          "marstek_device_id": "Marstek device ID"
+        }
+      },
+      "zendure": {
+        "title": "Multi Battery HEMS — Zendure SolarFlow",
+        "data": {
+          "zendure_name": "Device name",
+          "zendure_charge_limit_entity": "Charge limit (number entity)",
+          "zendure_discharge_limit_entity": "Discharge limit (number entity)"
         }
       }
     }

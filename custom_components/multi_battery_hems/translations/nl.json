@@ -2,11 +2,11 @@
   "config": {
     "step": {
       "user": {
-        "title": "Multi Battery HEMS — Algemene instellingen",
-        "description": "Configureer de P1-meter, energieprijssensor en standaardstrategie.",
+        "title": "Multi Battery HEMS — Sensoren & strategie",
+        "description": "Selecteer uw P1-metersensor en energieprijssensor via de keuzelijsten en kies de standaardstrategie.",
         "data": {
-          "p1_sensor": "P1-metersensor (entiteit-ID)",
-          "price_sensor": "Energieprijssensor (entiteit-ID)",
+          "p1_sensor": "P1-metersensor",
+          "price_sensor": "Energieprijssensor",
           "price_attribute": "Prijsattribuut (standaard: prices_today)",
           "strategy": "Standaardstrategie"
         }
@@ -21,18 +21,50 @@
       },
       "marstek": {
         "title": "Multi Battery HEMS — Marstek Venus E",
-        "description": "Voer het apparaat-ID in zoals getoond in de marstek_local_api integratie.",
+        "description": "Voer het apparaat-ID in zoals getoond in de marstek_local_api integratie (Instellingen → Apparaten → Marstek).",
         "data": {
           "marstek_device_id": "Marstek apparaat-ID"
         }
       },
       "zendure": {
         "title": "Multi Battery HEMS — Zendure SolarFlow",
-        "description": "Voer de entiteit-ID's in van de laad- en ontlaadlimiet number-entiteiten.",
+        "description": "Selecteer de laad- en ontlaadlimiet-entiteiten van uw Zendure uit de keuzelijsten.",
         "data": {
           "zendure_name": "Apparaatnaam",
-          "zendure_charge_limit_entity": "Laadlimiet entiteit-ID",
-          "zendure_discharge_limit_entity": "Ontlaadlimiet entiteit-ID"
+          "zendure_charge_limit_entity": "Laadlimiet (number entiteit)",
+          "zendure_discharge_limit_entity": "Ontlaadlimiet (number entiteit)"
+        }
+      },
+      "reconfigure": {
+        "title": "Multi Battery HEMS — Herconfigueren",
+        "description": "Pas uw instellingen aan. Alle velden zijn vooraf ingevuld met de huidige configuratie.",
+        "data": {
+          "p1_sensor": "P1-metersensor",
+          "price_sensor": "Energieprijssensor",
+          "price_attribute": "Prijsattribuut",
+          "strategy": "Strategie"
+        }
+      },
+      "devices_reconfigure": {
+        "title": "Multi Battery HEMS — Apparaten",
+        "description": "Welke batterijen zijn aanwezig?",
+        "data": {
+          "marstek_enabled": "Marstek Venus E aanwezig",
+          "zendure_enabled": "Zendure SolarFlow aanwezig"
+        }
+      },
+      "marstek_reconfigure": {
+        "title": "Multi Battery HEMS — Marstek Venus E",
+        "data": {
+          "marstek_device_id": "Marstek apparaat-ID"
+        }
+      },
+      "zendure_reconfigure": {
+        "title": "Multi Battery HEMS — Zendure SolarFlow",
+        "data": {
+          "zendure_name": "Apparaatnaam",
+          "zendure_charge_limit_entity": "Laadlimiet (number entiteit)",
+          "zendure_discharge_limit_entity": "Ontlaadlimiet (number entiteit)"
         }
       }
     },
@@ -41,16 +73,41 @@
       "unknown": "Onverwachte fout opgetreden"
     },
     "abort": {
-      "already_configured": "Multi Battery HEMS is al geconfigureerd"
+      "already_configured": "Multi Battery HEMS is al geconfigureerd",
+      "reconfigure_successful": "Herconfigueren geslaagd"
     }
   },
   "options": {
     "step": {
       "init": {
-        "title": "HEMS strategie wijzigen",
-        "description": "Kies de gewenste energiestrategie. De wijziging is onmiddellijk van kracht.",
+        "title": "Multi Battery HEMS — Instellingen wijzigen",
+        "description": "Pas uw instellingen aan. Alle velden zijn vooraf ingevuld met de huidige configuratie.",
         "data": {
+          "p1_sensor": "P1-metersensor",
+          "price_sensor": "Energieprijssensor",
+          "price_attribute": "Prijsattribuut",
           "strategy": "Actieve strategie"
+        }
+      },
+      "devices": {
+        "title": "Multi Battery HEMS — Apparaten",
+        "data": {
+          "marstek_enabled": "Marstek Venus E aanwezig",
+          "zendure_enabled": "Zendure SolarFlow aanwezig"
+        }
+      },
+      "marstek": {
+        "title": "Multi Battery HEMS — Marstek Venus E",
+        "data": {
+          "marstek_device_id": "Marstek apparaat-ID"
+        }
+      },
+      "zendure": {
+        "title": "Multi Battery HEMS — Zendure SolarFlow",
+        "data": {
+          "zendure_name": "Apparaatnaam",
+          "zendure_charge_limit_entity": "Laadlimiet (number entiteit)",
+          "zendure_discharge_limit_entity": "Ontlaadlimiet (number entiteit)"
         }
       }
     }
