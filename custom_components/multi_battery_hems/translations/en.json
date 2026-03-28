@@ -1,0 +1,58 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Multi Battery HEMS — General settings",
+        "description": "Configure the P1 meter, energy price sensor, and default strategy.",
+        "data": {
+          "p1_sensor": "P1 meter sensor (entity ID)",
+          "price_sensor": "Energy price sensor (entity ID)",
+          "price_attribute": "Price attribute (default: prices_today)",
+          "strategy": "Default strategy"
+        }
+      },
+      "devices": {
+        "title": "Multi Battery HEMS — Devices",
+        "description": "Which batteries are present in your setup?",
+        "data": {
+          "marstek_enabled": "Marstek Venus E present",
+          "zendure_enabled": "Zendure SolarFlow present"
+        }
+      },
+      "marstek": {
+        "title": "Multi Battery HEMS — Marstek Venus E",
+        "description": "Enter the device ID as shown in the marstek_local_api integration.",
+        "data": {
+          "marstek_device_id": "Marstek device ID"
+        }
+      },
+      "zendure": {
+        "title": "Multi Battery HEMS — Zendure SolarFlow",
+        "description": "Enter the entity IDs for the charge and discharge limit number entities.",
+        "data": {
+          "zendure_name": "Device name",
+          "zendure_charge_limit_entity": "Charge limit entity ID",
+          "zendure_discharge_limit_entity": "Discharge limit entity ID"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to device",
+      "unknown": "Unexpected error occurred"
+    },
+    "abort": {
+      "already_configured": "Multi Battery HEMS is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Change HEMS strategy",
+        "description": "Select the desired energy management strategy. The change takes effect immediately.",
+        "data": {
+          "strategy": "Active strategy"
+        }
+      }
+    }
+  }
+}

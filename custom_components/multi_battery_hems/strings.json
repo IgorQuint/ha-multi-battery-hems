@@ -1,0 +1,55 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Multi Battery HEMS — Algemene instellingen",
+        "description": "Configureer de P1-meter, energieprijssensor en standaardstrategie.",
+        "data": {
+          "p1_sensor": "P1-metersensor (entiteit-ID)",
+          "price_sensor": "Energieprijssensor (entiteit-ID)",
+          "price_attribute": "Prijsattribuut (standaard: prices_today)",
+          "strategy": "Standaardstrategie"
+        }
+      },
+      "devices": {
+        "title": "Multi Battery HEMS — Apparaten",
+        "description": "Welke batterijen zijn aanwezig?",
+        "data": {
+          "marstek_enabled": "Marstek Venus E",
+          "zendure_enabled": "Zendure SolarFlow"
+        }
+      },
+      "marstek": {
+        "title": "Multi Battery HEMS — Marstek Venus E",
+        "data": {
+          "marstek_device_id": "Marstek apparaat-ID (uit marstek_local_api)"
+        }
+      },
+      "zendure": {
+        "title": "Multi Battery HEMS — Zendure SolarFlow",
+        "data": {
+          "zendure_name": "Naam (bijv. SolarFlow 800 Plus)",
+          "zendure_charge_limit_entity": "Laadlimiet entiteit-ID (number.*)",
+          "zendure_discharge_limit_entity": "Ontlaadlimiet entiteit-ID (number.*)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kan niet verbinden",
+      "unknown": "Onverwachte fout"
+    },
+    "abort": {
+      "already_configured": "Al geconfigureerd"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "HEMS strategie wijzigen",
+        "data": {
+          "strategy": "Actieve strategie"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "domain": "multi_battery_hems",
+  "name": "Multi Battery HEMS",
+  "version": "0.1.0",
+  "documentation": "https://github.com/igorquint/ha-multi-battery-hems",
+  "issue_tracker": "https://github.com/igorquint/ha-multi-battery-hems/issues",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": ["@igorquint"],
+  "iot_class": "local_polling",
+  "config_flow": true
+}
