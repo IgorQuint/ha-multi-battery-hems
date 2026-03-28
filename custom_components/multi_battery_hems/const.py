@@ -5,7 +5,7 @@ Constants for Multi Battery HEMS.
 
 DOMAIN = "multi_battery_hems"
 MANUFACTURER = "Multi Battery HEMS"
-VERSION = "0.1.0"
+VERSION = "0.1"
 
 # --- Strategies / Strategieën ---
 STRATEGY_STANDBY = "standby"
