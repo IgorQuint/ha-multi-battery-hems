@@ -1,272 +1,156 @@
-# =============================================================================
-# Multi Battery HEMS — Ready-made Lovelace Dashboard
-# =============================================================================
-#
-# HOW TO IMPORT:
-#   Settings → Dashboards → Add Dashboard → Give it a name
-#   Then: Edit Dashboard (pencil icon) → three dots → Raw configuration editor
-#   Paste this file (from 'views:' onwards), or import the full file.
-#
-# ENTITY IDs:
-#   HA generates entity IDs from the integration domain + entity name.
-#   Your actual IDs may differ slightly — check Settings → Developer Tools → States
-#   and filter on 'multi_battery_hems' to find the exact names.
-#
-# OPTIONAL BETTER CARDS (install via HACS → Frontend):
-#   - apexcharts-card  : richer charts (price curve, power history)
-#   - mini-graph-card  : compact sparkline graphs
-#   - mushroom         : modern card styling
-#   Sections using optional cards are marked with [OPTIONAL: <card-name>]
-#
-# =============================================================================
-
 title: Multi Battery HEMS
 views:
 
   # ---------------------------------------------------------------------------
-  # View 1 — Overview (main monitoring view)
+  # View 1 — Live Monitor
   # ---------------------------------------------------------------------------
-  - title: Overzicht
-    path: hems-overview
-    icon: mdi:battery-charging
+  - title: Live Monitor
+    path: live-monitor
+    icon: mdi:monitor-eye
     cards:
 
-      # --- Strategy + live readings ---
-      - type: entities
-        title: Systeem
-        show_header_toggle: false
-        entities:
-          - entity: select.multi_battery_hems_actieve_strategie
-            name: Actieve strategie
-            icon: mdi:strategy
-          - entity: sensor.multi_battery_hems_netvermogen
-            name: Netvermogen (P1)
-            icon: mdi:transmission-tower
-          - entity: sensor.multi_battery_hems_actuele_stroomprijs
-            name: Actuele stroomprijs
-            icon: mdi:currency-eur
+      - type: markdown
+        title: HEMS Status
+        content: |
+          ## HEMS Status
+          <ha-entity-badge entity="sensor.multi_battery_hems_status"></ha-entity-badge>
 
-      # --- Grid power gauge ---
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            title: Overzicht
+            entities:
+              - entity: select.multi_battery_hems_actieve_strategie
+                name: Actieve strategie
+              - entity: sensor.multi_battery_hems_netvermogen
+                name: Netvermogen
+              - entity: sensor.multi_battery_hems_actuele_stroomprijs
+                name: Actuele stroomprijs
+              - entity: sensor.multi_battery_hems_status
+                name: Status
+
       - type: gauge
+        title: Netvermogen
         entity: sensor.multi_battery_hems_netvermogen
-        name: Netvermogen
         min: -3500
         max: 3500
         needle: true
         severity:
-          green: -500
-          yellow: 500
-          red: 2000
-        segments:
-          - from: -3500
-            color: "#00c853"   # returning to grid — green
-          - from: -200
-            color: "#f9a825"   # near zero — yellow
-          - from: 200
-            color: "#d32f2f"   # consuming from grid — red
+          green: -3500
+          yellow: -200
+          red: 200
 
-      # --- Grid power history (last 6 hours) ---
       - type: history-graph
-        title: Netvermogen — afgelopen 6 uur
-        hours_to_show: 6
+        title: Netvermogen (2 uur)
+        hours_to_show: 2
         entities:
           - entity: sensor.multi_battery_hems_netvermogen
-            name: Net (W)
+            name: Netvermogen
 
-      # --- Today's price history ---
       - type: history-graph
-        title: Stroomprijs vandaag
+        title: Stroomprijs (24 uur)
         hours_to_show: 24
         entities:
           - entity: sensor.multi_battery_hems_actuele_stroomprijs
-            name: Prijs (€/kWh)
+            name: Stroomprijs
 
   # ---------------------------------------------------------------------------
-  # View 2 — Batteries (per device status)
+  # View 2 — Testmodus & Bediening
   # ---------------------------------------------------------------------------
-  - title: Batterijen
-    path: hems-batteries
-    icon: mdi:battery
-    cards:
-
-      # --- Marstek Venus E ---
-      - type: entities
-        title: Marstek Venus E
-        show_header_toggle: false
-        entities:
-          - entity: sensor.multi_battery_hems_marstek_venus_e_dag_geladen
-            name: Vandaag geladen
-            icon: mdi:battery-plus
-          - entity: sensor.multi_battery_hems_marstek_venus_e_dag_ontladen
-            name: Vandaag ontladen
-            icon: mdi:battery-minus
-          - type: divider
-          - entity: sensor.multi_battery_hems_marstek_venus_e_dagwinst
-            name: Dagwinst
-            icon: mdi:cash
-          - entity: sensor.multi_battery_hems_marstek_venus_e_weekwinst
-            name: Weekwinst
-            icon: mdi:cash
-          - entity: sensor.multi_battery_hems_marstek_venus_e_maandwinst
-            name: Maandwinst
-            icon: mdi:cash
-          - entity: sensor.multi_battery_hems_marstek_venus_e_jaarwinst
-            name: Jaarwinst
-            icon: mdi:cash
-          - type: divider
-          - entity: sensor.multi_battery_hems_marstek_venus_e_totaal_geladen
-            name: Totaal geladen (lifetime)
-            icon: mdi:sigma
-          - entity: sensor.multi_battery_hems_marstek_venus_e_totaal_ontladen
-            name: Totaal ontladen (lifetime)
-            icon: mdi:sigma
-
-      # --- Marstek profit history graph ---
-      - type: history-graph
-        title: Marstek — dagwinst trend
-        hours_to_show: 168   # 7 days
-        entities:
-          - entity: sensor.multi_battery_hems_marstek_venus_e_dagwinst
-            name: Dagwinst (€)
-
-      # --- Zendure SolarFlow ---
-      - type: entities
-        title: Zendure SolarFlow
-        show_header_toggle: false
-        entities:
-          - entity: sensor.multi_battery_hems_zendure_solarflow_dag_geladen
-            name: Vandaag geladen
-            icon: mdi:battery-plus
-          - entity: sensor.multi_battery_hems_zendure_solarflow_dag_ontladen
-            name: Vandaag ontladen
-            icon: mdi:battery-minus
-          - type: divider
-          - entity: sensor.multi_battery_hems_zendure_solarflow_dagwinst
-            name: Dagwinst
-            icon: mdi:cash
-          - entity: sensor.multi_battery_hems_zendure_solarflow_weekwinst
-            name: Weekwinst
-            icon: mdi:cash
-          - entity: sensor.multi_battery_hems_zendure_solarflow_maandwinst
-            name: Maandwinst
-            icon: mdi:cash
-          - entity: sensor.multi_battery_hems_zendure_solarflow_jaarwinst
-            name: Jaarwinst
-            icon: mdi:cash
-          - type: divider
-          - entity: sensor.multi_battery_hems_zendure_solarflow_totaal_geladen
-            name: Totaal geladen (lifetime)
-            icon: mdi:sigma
-          - entity: sensor.multi_battery_hems_zendure_solarflow_totaal_ontladen
-            name: Totaal ontladen (lifetime)
-            icon: mdi:sigma
-
-  # ---------------------------------------------------------------------------
-  # View 3 — Financiën (combined totals)
-  # ---------------------------------------------------------------------------
-  - title: Financiën
-    path: hems-finance
-    icon: mdi:cash-multiple
-    cards:
-
-      # --- Combined glance ---
-      - type: glance
-        title: Gecombineerd — snel overzicht
-        show_name: true
-        show_icon: true
-        show_state: true
-        entities:
-          - entity: sensor.multi_battery_hems_gecombineerd_dagwinst
-            name: Dag
-            icon: mdi:calendar-today
-          - entity: sensor.multi_battery_hems_gecombineerd_weekwinst
-            name: Week
-            icon: mdi:calendar-week
-          - entity: sensor.multi_battery_hems_gecombineerd_maandwinst
-            name: Maand
-            icon: mdi:calendar-month
-          - entity: sensor.multi_battery_hems_gecombineerd_jaarwinst
-            name: Jaar
-            icon: mdi:calendar
-
-      # --- Combined detailed ---
-      - type: entities
-        title: Gecombineerd — detail
-        show_header_toggle: false
-        entities:
-          - entity: sensor.multi_battery_hems_gecombineerd_dag_geladen
-            name: Vandaag geladen (kWh)
-          - entity: sensor.multi_battery_hems_gecombineerd_dag_ontladen
-            name: Vandaag ontladen (kWh)
-          - type: divider
-          - entity: sensor.multi_battery_hems_gecombineerd_week_geladen
-            name: Week geladen (kWh)
-          - entity: sensor.multi_battery_hems_gecombineerd_week_ontladen
-            name: Week ontladen (kWh)
-          - type: divider
-          - entity: sensor.multi_battery_hems_gecombineerd_maand_geladen
-            name: Maand geladen (kWh)
-          - entity: sensor.multi_battery_hems_gecombineerd_maand_ontladen
-            name: Maand ontladen (kWh)
-          - type: divider
-          - entity: sensor.multi_battery_hems_gecombineerd_jaar_geladen
-            name: Jaar geladen (kWh)
-          - entity: sensor.multi_battery_hems_gecombineerd_jaar_ontladen
-            name: Jaar ontladen (kWh)
-          - type: divider
-          - entity: sensor.multi_battery_hems_gecombineerd_totaal_geladen
-            name: Totaal geladen (lifetime kWh)
-          - entity: sensor.multi_battery_hems_gecombineerd_totaal_ontladen
-            name: Totaal ontladen (lifetime kWh)
-
-      # --- Profit trend (7 days) ---
-      - type: history-graph
-        title: Gecombineerde dagwinst — afgelopen 7 dagen
-        hours_to_show: 168
-        entities:
-          - entity: sensor.multi_battery_hems_gecombineerd_dagwinst
-            name: Dagwinst (€)
-
-      # --- Energy flow (7 days) ---
-      - type: history-graph
-        title: Energiestroom — afgelopen 7 dagen
-        hours_to_show: 168
-        entities:
-          - entity: sensor.multi_battery_hems_gecombineerd_dag_geladen
-            name: Geladen (kWh)
-          - entity: sensor.multi_battery_hems_gecombineerd_dag_ontladen
-            name: Ontladen (kWh)
-
-  # ---------------------------------------------------------------------------
-  # View 4 — [OPTIONAL] Enhanced charts (requires apexcharts-card from HACS)
-  # ---------------------------------------------------------------------------
-  - title: Grafieken
-    path: hems-charts
-    icon: mdi:chart-line
+  - title: Testmodus & Bediening
+    path: testmodus
+    icon: mdi:test-tube
     cards:
 
       - type: markdown
-        content: >
-          ## Geavanceerde grafieken
+        content: |
+          ## Testmodus
 
-          Deze weergave gebruikt **apexcharts-card** voor rijkere visualisaties.
-          Installeer deze via HACS → Frontend → apexcharts-card.
+          Stel een P1-testwaarde in om de integratie te testen zonder echte hardware:
+          - **Positief** (+500W): simuleert netverbruik → strategie moet ontladen
+          - **Negatief** (-400W): simuleert teruglevering → strategie moet laden
+          - **0**: testmodus uit, echte P1-sensor actief
 
-          Vervang de onderstaande kaarten door `type: custom:apexcharts-card`
-          als je de kaart hebt geïnstalleerd.
-
-      # Placeholder — replace with apexcharts-card for a live price bar chart
-      - type: history-graph
-        title: Stroomprijs vandaag (vervang door apexcharts voor staafdiagram)
-        hours_to_show: 24
+      - type: entities
+        title: Testbediening
         entities:
-          - entity: sensor.multi_battery_hems_actuele_stroomprijs
-            name: €/kWh
+          - entity: number.multi_battery_hems_p1_testwaarde
+            name: P1 testwaarde
+          - entity: button.multi_battery_hems_stop_testmodus
+            name: Stop testmodus
+          - entity: button.multi_battery_hems_nu_bijwerken
+            name: Nu bijwerken
 
-      # Placeholder — replace with apexcharts-card for multi-series power chart
-      - type: history-graph
-        title: Batterijvermogen vs. netvermogen
-        hours_to_show: 24
+      - type: entities
+        title: Strategiebediening
         entities:
-          - entity: sensor.multi_battery_hems_netvermogen
-            name: Net (W)
+          - entity: select.multi_battery_hems_actieve_strategie
+            name: Actieve strategie
+
+      - type: markdown
+        content: |
+          ## Teken-correctie
+
+          Als de integratie het omgekeerde doet van wat verwacht:
+          1. Ga naar **Instellingen → Integraties → Multi Battery HEMS → Configureren**
+          2. Zet 'P1 teken omdraaien' aan
+          3. Herstart de integratie
+
+  # ---------------------------------------------------------------------------
+  # View 3 — Financiën
+  # ---------------------------------------------------------------------------
+  - title: Financiën
+    path: financien
+    icon: mdi:cash-multiple
+    cards:
+
+      - type: glance
+        title: Gecombineerd
+        entities:
+          - entity: sensor.multi_battery_hems_gecombineerd_dagwinst
+            name: Dagwinst
+          - entity: sensor.multi_battery_hems_gecombineerd_weekwinst
+            name: Weekwinst
+          - entity: sensor.multi_battery_hems_gecombineerd_maandwinst
+            name: Maandwinst
+          - entity: sensor.multi_battery_hems_gecombineerd_jaarwinst
+            name: Jaarwinst
+
+      - type: entities
+        title: Marstek Venus E
+        entities:
+          - entity: sensor.multi_battery_hems_marstek_venus_e_dagwinst
+            name: Dagwinst
+          - entity: sensor.multi_battery_hems_marstek_venus_e_weekwinst
+            name: Weekwinst
+          - entity: sensor.multi_battery_hems_marstek_venus_e_maandwinst
+            name: Maandwinst
+          - entity: sensor.multi_battery_hems_marstek_venus_e_jaarwinst
+            name: Jaarwinst
+          - entity: sensor.multi_battery_hems_marstek_venus_e_totaal_geladen
+            name: Totaal geladen (kWh)
+          - entity: sensor.multi_battery_hems_marstek_venus_e_totaal_ontladen
+            name: Totaal ontladen (kWh)
+
+      - type: entities
+        title: Zendure SolarFlow
+        entities:
+          - entity: sensor.multi_battery_hems_zendure_solarflow_dagwinst
+            name: Dagwinst
+          - entity: sensor.multi_battery_hems_zendure_solarflow_weekwinst
+            name: Weekwinst
+          - entity: sensor.multi_battery_hems_zendure_solarflow_maandwinst
+            name: Maandwinst
+          - entity: sensor.multi_battery_hems_zendure_solarflow_jaarwinst
+            name: Jaarwinst
+          - entity: sensor.multi_battery_hems_zendure_solarflow_totaal_geladen
+            name: Totaal geladen (kWh)
+          - entity: sensor.multi_battery_hems_zendure_solarflow_totaal_ontladen
+            name: Totaal ontladen (kWh)
+
+      - type: history-graph
+        title: Gecombineerde dagwinst (7 dagen)
+        hours_to_show: 168
+        entities:
+          - entity: sensor.multi_battery_hems_gecombineerd_dagwinst
+            name: Dagwinst

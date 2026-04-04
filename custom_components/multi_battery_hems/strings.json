@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Multi Battery HEMS — Sensoren & strategie",
-        "description": "Selecteer uw P1-metersensor en energieprijssensor via de keuzelijsten en kies de standaardstrategie.",
+        "description": "Selecteer uw P1-metersensor en energieprijssensor en kies de standaardstrategie.",
         "data": {
           "p1_sensor": "P1-metersensor",
           "price_sensor": "Energieprijssensor",
@@ -21,23 +21,40 @@
       },
       "marstek": {
         "title": "Multi Battery HEMS — Marstek Venus E",
-        "description": "Voer het apparaat-ID in zoals getoond in de marstek_local_api integratie (Instellingen → Apparaten → Marstek).",
+        "description": "Voer het apparaat-ID in vanuit de marstek_local_api integratie. SoC-sensor is optioneel maar aanbevolen voor SoC-bescherming.",
         "data": {
-          "marstek_device_id": "Marstek apparaat-ID"
+          "marstek_device_id": "Marstek apparaat-ID",
+          "marstek_soc_entity": "SoC-sensor (optioneel)"
         }
       },
       "zendure": {
         "title": "Multi Battery HEMS — Zendure SolarFlow",
-        "description": "Selecteer de laad- en ontlaadlimiet-entiteiten van uw Zendure uit de keuzelijsten.",
+        "description": "Selecteer de laad- en ontlaadlimiet-entiteiten en optioneel de SoC-sensor.",
         "data": {
           "zendure_name": "Apparaatnaam",
           "zendure_charge_limit_entity": "Laadlimiet (number entiteit)",
-          "zendure_discharge_limit_entity": "Ontlaadlimiet (number entiteit)"
+          "zendure_discharge_limit_entity": "Ontlaadlimiet (number entiteit)",
+          "zendure_soc_entity": "SoC-sensor (optioneel)"
+        }
+      },
+      "advanced": {
+        "title": "Multi Battery HEMS — Geavanceerde instellingen",
+        "description": "Stel SoC-limieten, hysteresismarges en dynamische periode-instellingen in.",
+        "data": {
+          "invert_p1_sign": "P1 teken omdraaien (als omgekeerd gedrag optreedt)",
+          "min_soc_pct": "Minimale SoC (%) — forceer laden hieronder",
+          "max_soc_pct": "Maximale SoC (%) — stop laden hierboven",
+          "charge_margin_w": "Laadmarge (W) — hysterese voor laden",
+          "discharge_margin_w": "Ontlaadmarge (W) — hysterese voor ontladen",
+          "cheap_hours": "Aantal goedkoopste uren (arbitrage/dynamisch NOM)",
+          "expensive_hours": "Aantal duurste uren (arbitrage/dynamisch NOM)",
+          "min_spread_pct": "Minimale prijsspread (%) voor arbitrage",
+          "manual_power_w": "Handmatig vermogen (W) — positief=laden, negatief=ontladen"
         }
       },
       "reconfigure": {
         "title": "Multi Battery HEMS — Herconfigueren",
-        "description": "Pas uw instellingen aan. Alle velden zijn vooraf ingevuld met de huidige configuratie.",
+        "description": "Pas uw instellingen aan. Alle velden zijn vooraf ingevuld.",
         "data": {
           "p1_sensor": "P1-metersensor",
           "price_sensor": "Energieprijssensor",
@@ -47,7 +64,6 @@
       },
       "devices_reconfigure": {
         "title": "Multi Battery HEMS — Apparaten",
-        "description": "Welke batterijen zijn aanwezig?",
         "data": {
           "marstek_enabled": "Marstek Venus E aanwezig",
           "zendure_enabled": "Zendure SolarFlow aanwezig"
@@ -56,7 +72,8 @@
       "marstek_reconfigure": {
         "title": "Multi Battery HEMS — Marstek Venus E",
         "data": {
-          "marstek_device_id": "Marstek apparaat-ID"
+          "marstek_device_id": "Marstek apparaat-ID",
+          "marstek_soc_entity": "SoC-sensor (optioneel)"
         }
       },
       "zendure_reconfigure": {
@@ -64,13 +81,28 @@
         "data": {
           "zendure_name": "Apparaatnaam",
           "zendure_charge_limit_entity": "Laadlimiet (number entiteit)",
-          "zendure_discharge_limit_entity": "Ontlaadlimiet (number entiteit)"
+          "zendure_discharge_limit_entity": "Ontlaadlimiet (number entiteit)",
+          "zendure_soc_entity": "SoC-sensor (optioneel)"
+        }
+      },
+      "advanced_reconfigure": {
+        "title": "Multi Battery HEMS — Geavanceerde instellingen",
+        "data": {
+          "invert_p1_sign": "P1 teken omdraaien (als omgekeerd gedrag optreedt)",
+          "min_soc_pct": "Minimale SoC (%)",
+          "max_soc_pct": "Maximale SoC (%)",
+          "charge_margin_w": "Laadmarge (W)",
+          "discharge_margin_w": "Ontlaadmarge (W)",
+          "cheap_hours": "Aantal goedkoopste uren",
+          "expensive_hours": "Aantal duurste uren",
+          "min_spread_pct": "Minimale prijsspread (%)",
+          "manual_power_w": "Handmatig vermogen (W)"
         }
       }
     },
     "error": {
-      "cannot_connect": "Kan niet verbinden met het apparaat",
-      "unknown": "Onverwachte fout opgetreden"
+      "cannot_connect": "Kan niet verbinden",
+      "unknown": "Onverwachte fout"
     },
     "abort": {
       "already_configured": "Multi Battery HEMS is al geconfigureerd",
@@ -81,7 +113,7 @@
     "step": {
       "init": {
         "title": "Multi Battery HEMS — Instellingen wijzigen",
-        "description": "Pas uw instellingen aan. Alle velden zijn vooraf ingevuld met de huidige configuratie.",
+        "description": "Alle velden zijn vooraf ingevuld met de huidige configuratie.",
         "data": {
           "p1_sensor": "P1-metersensor",
           "price_sensor": "Energieprijssensor",
@@ -99,7 +131,8 @@
       "marstek": {
         "title": "Multi Battery HEMS — Marstek Venus E",
         "data": {
-          "marstek_device_id": "Marstek apparaat-ID"
+          "marstek_device_id": "Marstek apparaat-ID",
+          "marstek_soc_entity": "SoC-sensor (optioneel)"
         }
       },
       "zendure": {
@@ -107,7 +140,22 @@
         "data": {
           "zendure_name": "Apparaatnaam",
           "zendure_charge_limit_entity": "Laadlimiet (number entiteit)",
-          "zendure_discharge_limit_entity": "Ontlaadlimiet (number entiteit)"
+          "zendure_discharge_limit_entity": "Ontlaadlimiet (number entiteit)",
+          "zendure_soc_entity": "SoC-sensor (optioneel)"
+        }
+      },
+      "advanced": {
+        "title": "Multi Battery HEMS — Geavanceerde instellingen",
+        "data": {
+          "invert_p1_sign": "P1 teken omdraaien (als omgekeerd gedrag optreedt)",
+          "min_soc_pct": "Minimale SoC (%)",
+          "max_soc_pct": "Maximale SoC (%)",
+          "charge_margin_w": "Laadmarge (W)",
+          "discharge_margin_w": "Ontlaadmarge (W)",
+          "cheap_hours": "Aantal goedkoopste uren",
+          "expensive_hours": "Aantal duurste uren",
+          "min_spread_pct": "Minimale prijsspread (%)",
+          "manual_power_w": "Handmatig vermogen (W)"
         }
       }
     }

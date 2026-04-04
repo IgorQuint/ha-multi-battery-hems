@@ -38,7 +38,7 @@ from .coordinator import HemsCoordinator
 _LOGGER = logging.getLogger(__name__)
 
 # Platforms provided by this integration
-PLATFORMS = [Platform.SENSOR, Platform.SELECT]
+PLATFORMS = [Platform.SENSOR, Platform.SELECT, Platform.NUMBER, Platform.BUTTON]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:

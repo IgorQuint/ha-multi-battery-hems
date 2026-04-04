@@ -1,7 +1,7 @@
 {
   "domain": "multi_battery_hems",
   "name": "Multi Battery HEMS",
-  "version": "0.1",
+  "version": "0.3",
   "documentation": "https://github.com/multi-battery-hems/ha-multi-battery-hems",
   "issue_tracker": "https://github.com/multi-battery-hems/ha-multi-battery-hems/issues",
   "requirements": [],

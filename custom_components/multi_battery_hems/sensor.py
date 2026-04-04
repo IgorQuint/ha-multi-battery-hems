@@ -71,6 +71,7 @@ async def async_setup_entry(
     entities: list[SensorEntity] = [
         HemsGridPowerSensor(coordinator, entry),
         HemsPriceSensor(coordinator, entry),
+        HemsStatusSensor(coordinator, entry),
     ]
 
     # Sensors per physical device
@@ -252,3 +253,41 @@ class HemsProfitSensor(HemsBaseSensor):
     def native_value(self) -> float:
         fin = self.coordinator.tracker.get(self._device_id)
         return round(self._getter(fin), 4)
+
+
+class HemsStatusSensor(HemsBaseSensor):
+    """
+    Plain-language status sensor explaining what HEMS is doing and why.
+    / Plain-text status-sensor die uitlegt wat HEMS doet en waarom.
+
+    State: short action summary (e.g. "Marstek Venus E: ontladen 370W")
+    Attributes:
+      - reden: full explanation string
+      - grid_power_w: raw P1 reading
+      - grid_richting: "verbruik" / "teruglevering" / "balans" / "TEST"
+      - strategie: active strategy friendly name
+      - prijs_eur_kwh: current price
+      - testmodus: True if P1 override is active
+    """
+    _attr_icon = "mdi:information-outline"
+
+    def __init__(self, coordinator: HemsCoordinator, entry: ConfigEntry) -> None:
+        super().__init__(coordinator, entry, "status", "Status")
+
+    @property
+    def native_value(self) -> str:
+        return self.coordinator.last_action
+
+    @property
+    def extra_state_attributes(self) -> dict:
+        from .const import STRATEGY_FRIENDLY_NAMES
+        return {
+            "reden": self.coordinator.last_reason,
+            "grid_power_w": round(self.coordinator.grid_power_w, 0),
+            "grid_richting": self.coordinator.p1_direction,
+            "strategie": STRATEGY_FRIENDLY_NAMES.get(
+                self.coordinator.active_strategy, self.coordinator.active_strategy
+            ),
+            "prijs_eur_kwh": round(self.coordinator.current_price_eur, 5),
+            "testmodus": self.coordinator.p1_direction == "TEST",
+        }
